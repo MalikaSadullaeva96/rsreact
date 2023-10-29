@@ -19,7 +19,8 @@
   "include": [
     ".eslintrc.cjs",
     "src",
-    "vite.config.ts" 
+    "vite.config.ts",
+    "prettierrc.cjs"
   ],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

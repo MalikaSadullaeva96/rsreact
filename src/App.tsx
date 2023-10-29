@@ -1,7 +1,5 @@
 import React from "react";
 
-// Define the types for props and state
-// eslint-disable-next-line @typescript-eslint/ban-types
 type Props = {};
 
 type SearchResult = {
@@ -16,21 +14,15 @@ type State = {
 };
 
 class App extends React.Component<Props, State> {
-  // constructor(props: Props) {
-  //   super(props);
-  //   this.state = {
-  //     searchTerm: "",
-  //     results: [],
-  //     loading: false,
-  //   };
   constructor(props: Props) {
     super(props);
 
     const savedResults = localStorage.getItem("searchResults");
     const parsedResults = savedResults ? JSON.parse(savedResults) : [];
+    const lastSearchTerm = localStorage.getItem("lastSearchTerm") || "";
 
     this.state = {
-      searchTerm: "",
+      searchTerm: lastSearchTerm,
       results: parsedResults,
       loading: false,
     };
@@ -45,9 +37,8 @@ class App extends React.Component<Props, State> {
 
   async handleSearch() {
     this.setState({ loading: true });
-
+    const { searchTerm } = this.state;
     try {
-      const { searchTerm } = this.state;
       const response = await fetch(`https://pokeapi.co/api/v2/${searchTerm}`);
       const data = await response.json();
 
@@ -64,7 +55,9 @@ class App extends React.Component<Props, State> {
       });
 
       localStorage.setItem("searchResults", JSON.stringify(newResults));
+      localStorage.setItem("lastSearchTerm", searchTerm);
     } catch (error) {
+      console.error("There was an error fetching the data:", error);
       this.setState({
         results: [],
         loading: false,
@@ -92,7 +85,6 @@ class App extends React.Component<Props, State> {
 
         <div>
           {results.map((result, index) => (
-            // eslint-disable-next-line react/no-array-index-key
             <div key={index}>
               <h3>{result.name}</h3>
               <p>URL: {result.url}</p>
