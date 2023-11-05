@@ -9,10 +9,22 @@
 
 .DisplaySelection h1 {
     font-size: 36px;
-    padding-left: 3%;
 }
 
 
 .DisplaySelection img {
     width: 200px;
 }
+
+.allPokemons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px; 
+  }
+  
+  .allPokemons > div {
+    flex: 1 0 50%; 
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }

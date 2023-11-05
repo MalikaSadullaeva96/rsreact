@@ -4,13 +4,10 @@ import "./DisplayPokemon.css";
 
 interface DisplayPokemonProps {
   pokemon: PokemonData | null;
+  allPokemons: PokemonData[];
 }
 
-function DisplayPokemon({ pokemon }: DisplayPokemonProps) {
-  if (pokemon) {
-    console.log("---->", pokemon.attack);
-  }
-
+function DisplayPokemon({ pokemon, allPokemons }: DisplayPokemonProps) {
   return (
     <div className="DisplaySelection">
       {pokemon ? (
@@ -24,7 +21,16 @@ function DisplayPokemon({ pokemon }: DisplayPokemonProps) {
           <h4>Defense: {pokemon.defense}</h4>
         </div>
       ) : (
-        <h1>No Pokemon selected</h1>
+        <>
+          <h1>All Pokémon</h1>
+          <div className="allPokemons">
+            {allPokemons.map((poke, index) => (
+              <div key={index}>
+                <h3>{poke.name}</h3>
+              </div>
+            ))}
+          </div>
+        </>
       )}
     </div>
   );
