@@ -4,7 +4,7 @@ import "./Input.css";
 import { PokemonData } from "../type";
 
 interface InputProps {
-  onPokemonSearch: (pokemon: PokemonData | null) => void;
+  onPokemonSearch: (pokemon: PokemonData[] | null) => void;
 }
 
 function Input({ onPokemonSearch }: InputProps) {

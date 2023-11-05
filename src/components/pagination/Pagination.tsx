@@ -5,7 +5,7 @@ import { PokemonData } from "../type";
 import "./Pagination.css";
 
 interface PaginationProps {
-  pokemon: PokemonData | null;
+  pokemon: PokemonData[] | null;
 }
 
 function Pagination({ pokemon }: PaginationProps) {

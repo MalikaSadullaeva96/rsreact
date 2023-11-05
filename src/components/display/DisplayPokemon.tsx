@@ -1,25 +1,40 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { PokemonData } from "../type";
 import "./DisplayPokemon.css";
 
 interface DisplayPokemonProps {
-  pokemon: PokemonData | null;
+  pokemon: PokemonData[] | null;
   allPokemons: PokemonData[];
 }
 
 function DisplayPokemon({ pokemon, allPokemons }: DisplayPokemonProps) {
-  console.log("------->", allPokemons);
+  console.log("------->", pokemon);
   return (
     <div className="DisplaySelection">
       {pokemon ? (
         <div>
-          <h1>{pokemon.name}</h1>
-          <img src={pokemon.img} alt={`Sprite of ${pokemon.name}`} />
-          <h3>Species: {pokemon.species}</h3>
-          <h3>Type: {pokemon.type}</h3>
-          <h4>HP: {pokemon.hp}</h4>
-          <h4>Attack: {pokemon.attack}</h4>
-          <h4>Defense: {pokemon.defense}</h4>
+          {pokemon.map(
+            (
+              value: {
+                name:
+                  | string
+                  | number
+                  | boolean
+                  | Iterable<React.ReactNode>
+                  | React.ReactPortal
+                  | null
+                  | undefined;
+              },
+              idx: number,
+            ) => (
+              <div key={idx}>
+                <h3>
+                  <Link to={`/pokemon/${value.name}`}>{value.name}</Link>
+                </h3>
+              </div>
+            ),
+          )}
         </div>
       ) : (
         <>
