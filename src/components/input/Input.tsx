@@ -1,9 +1,15 @@
 import React, { useState } from "react";
 import Search from "../seacrh/Search";
 import "./Input.css";
+import { PokemonData } from "../type";
 
-function Input() {
+interface InputProps {
+  onPokemonSearch: (pokemon: PokemonData | null) => void;
+}
+
+function Input({ onPokemonSearch }: InputProps) {
   const [pokemonName, setPokemonName] = useState("");
+
   return (
     <>
       <input
@@ -12,7 +18,7 @@ function Input() {
           setPokemonName(event.target.value);
         }}
       />
-      <Search pokemonName={pokemonName} />
+      <Search pokemonName={pokemonName} onPokemonSearch={onPokemonSearch} />
     </>
   );
 }
