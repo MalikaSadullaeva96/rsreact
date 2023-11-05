@@ -15,6 +15,7 @@ function Search({ pokemonName, onPokemonSearch }: SearchProps) {
     axios
       .get(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`)
       .then((response) => {
+        console.log(response);
         const newPokemon: PokemonData = {
           name: pokemonName,
           species: response.data.species.name,

@@ -8,6 +8,7 @@ interface DisplayPokemonProps {
 }
 
 function DisplayPokemon({ pokemon, allPokemons }: DisplayPokemonProps) {
+  console.log("------->", allPokemons);
   return (
     <div className="DisplaySelection">
       {pokemon ? (
