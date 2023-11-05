@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./Pokemons.css";
 
 function PokemonInfo() {
   const { name } = useParams();
+  const navigate = useNavigate();
   const [pokemonDetails, setPokemonDetails] = useState({
     name: "",
     species: "",
@@ -33,7 +34,11 @@ function PokemonInfo() {
   if (!pokemonDetails) {
     return <div>Loading...</div>;
   }
-  console.log("INFO", pokemonDetails);
+
+  const handleClose = () => {
+    navigate("/");
+  };
+
   return (
     <div className="pokemonInfo">
       {pokemonDetails && (
@@ -50,6 +55,11 @@ function PokemonInfo() {
           <h4>Defense: {pokemonDetails.defense}</h4>
         </div>
       )}
+      <div>
+        <button onClick={handleClose} type="submit" className="closeInfo">
+          Close
+        </button>
+      </div>
     </div>
   );
 }
