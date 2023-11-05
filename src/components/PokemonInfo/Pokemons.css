@@ -1,0 +1,19 @@
+h1, h3, h4 {
+    color: #000000;
+}
+
+.pokemonInfo {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.pokemonInfo img {
+    width: 200px;
+}
+
+.closeInfo {
+    margin-top: 20px;
+}
