@@ -25,7 +25,8 @@ function Search({ pokemonName, onPokemonSearch }: SearchProps) {
           type: response.data.types[0].type.name,
         };
         setPokemon(newPokemon);
-        onPokemonSearch(pokemon);
+        onPokemonSearch(newPokemon);
+        console.log(pokemon);
       });
   };
 
