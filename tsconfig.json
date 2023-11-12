@@ -22,7 +22,9 @@
     "src",
     "vite.config.ts",
     "prettierrc.cjs",
-    "setupTests.ts"
+    "setupTests.ts",
+    "__mocks__/**/*",
+    "src/components/pagination/TestComponent.tsx"
   ],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

@@ -5,6 +5,7 @@ import Input from "./components/input/Input";
 import Pagination from "./components/pagination/Pagination";
 import PokemonInfo from "./components/PokemonInfo/PokemonInfo";
 import { PokemonProvider } from "./components/state/PokemonContext";
+import { NotFoundPage } from "./components/notfound/NotFoundPage";
 
 function App() {
   return (
@@ -15,7 +16,6 @@ function App() {
             path="/"
             element={
               <div className="App">
-                <h1>AAAAA</h1>
                 <div className="TitleSection">
                   <div>Pokemon Stats</div>
                   <Input />
@@ -25,6 +25,7 @@ function App() {
             }
           />
           <Route path="/pokemon/:name" element={<PokemonInfo />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Router>
     </PokemonProvider>

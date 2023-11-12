@@ -28,7 +28,7 @@ function DisplayPokemon() {
               },
               idx: number,
             ) => (
-              <div key={idx}>
+              <div key={idx} data-testid="pokemon-item">
                 <h3>
                   <Link to={`/pokemon/${value.name}`}>{value.name}</Link>
                 </h3>

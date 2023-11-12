@@ -52,7 +52,7 @@ function Pagination() {
   return (
     <>
       <div>
-        <label htmlFor="limit">Pokémon per page:</label>
+        <label htmlFor="limit">Pokemon per page:</label>
         <input
           type="number"
           id="limit"
