@@ -1,31 +1,32 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "./Search.css";
 import axios from "axios";
 import { PokemonData } from "../type";
+import { PokemonContext } from "../state/PokemonContext";
 
-interface SearchProps {
-  pokemonName: string;
-  onPokemonSearch: (pokemons: PokemonData[] | null) => void;
-}
+function Search() {
+  const context = useContext(PokemonContext);
 
-function Search({ pokemonName, onPokemonSearch }: SearchProps) {
+  if (!context) return null;
+
+  const { setPokemon, searchValue } = context;
   const [allPokemons, setAllPokemons] = useState<PokemonData[]>([]);
 
   useEffect(() => {
     axios
       .get("https://pokeapi.co/api/v2/pokemon?limit=1118")
       .then((response) => {
-        console.log("-------->", response);
+        console.log("Fetched Pokemons:", response);
         setAllPokemons(response.data.results);
       });
   }, []);
 
   const searchPokemon = () => {
     const filteredPokemons = allPokemons.filter((pokemon) =>
-      pokemon.name.startsWith(pokemonName.toLowerCase()),
+      pokemon.name.startsWith(searchValue.toLowerCase()),
     );
-    console.log("filtered", filteredPokemons);
-    onPokemonSearch(filteredPokemons);
+    console.log("Filtered Pokemons:", filteredPokemons);
+    setPokemon(filteredPokemons);
   };
 
   return (

@@ -1,14 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import { PokemonData } from "../type";
+import { PokemonContext } from "../state/PokemonContext";
 import "./DisplayPokemon.css";
 
-interface DisplayPokemonProps {
-  pokemon: PokemonData[] | null;
-  allPokemons: PokemonData[];
-}
+function DisplayPokemon() {
 
-function DisplayPokemon({ pokemon, allPokemons }: DisplayPokemonProps) {
+  const context = useContext(PokemonContext);
+  if (!context) return null;
+
+  const { pokemon, allPokemons } = context;
+
   console.log("------->", pokemon);
   return (
     <div className="DisplaySelection">

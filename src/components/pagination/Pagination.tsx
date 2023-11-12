@@ -1,24 +1,24 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import DisplayPokemon from "../display/DisplayPokemon";
-import { PokemonData } from "../type";
+import { PokemonContext } from "../state/PokemonContext";
 import "./Pagination.css";
 
-interface PaginationProps {
-  pokemon: PokemonData[] | null;
-}
+function Pagination() {
+  const context = useContext(PokemonContext);
+  if (!context) return null;
 
-function Pagination({ pokemon }: PaginationProps) {
-  const [currentPageUrl, setCurrentPageUrl] = useState(
-    "https://pokeapi.co/api/v2/pokemon",
-  );
+  const { setAllPokemons } = context;
+
+  const baseUrl = "https://pokeapi.co/api/v2/pokemon";
+  const [currentPageUrl, setCurrentPageUrl] = useState(baseUrl);
   const [nextPageUrl, setNextPageUrl] = useState("");
   const [prevPageUrl, setPrevPageUrl] = useState("");
-  const [allPokemons, setAllPokemons] = useState<PokemonData[]>([]);
   const [limit, setLimit] = useState(10);
+  const [offset, setOffset] = useState(0);
 
   useEffect(() => {
-    const url = `${currentPageUrl}?limit=${limit}`;
+    const url = `${baseUrl}?limit=${limit}&offset=${offset}`;
     axios.get(url).then((response) => {
       setNextPageUrl(response.data.next);
       setPrevPageUrl(response.data.previous);
@@ -29,18 +29,24 @@ function Pagination({ pokemon }: PaginationProps) {
       );
       setAllPokemons(fetchedPokemons);
     });
-  }, [currentPageUrl, limit]);
+  }, [currentPageUrl, limit, offset]);
 
   const goToNextPage = () => {
     setCurrentPageUrl(nextPageUrl);
+    setOffset(offset + limit);
   };
 
   const goToPrevPage = () => {
     setCurrentPageUrl(prevPageUrl);
+    setOffset(Math.max(0, offset - limit));
   };
 
   const handleLimitChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setLimit(Number(event.target.value));
+    const newLimit = Number(event.target.value);
+    const newOffset = Math.floor(offset / limit) * limit + (offset % limit);
+    setLimit(newLimit);
+    setOffset(newOffset);
+    setCurrentPageUrl(`${baseUrl}?limit=${newLimit}&offset=${newOffset}`);
   };
 
   return (
@@ -56,7 +62,7 @@ function Pagination({ pokemon }: PaginationProps) {
           max="100"
         />
       </div>
-      <DisplayPokemon pokemon={pokemon} allPokemons={allPokemons} />
+      <DisplayPokemon />
       <div className="pagination">
         {prevPageUrl && (
           <button onClick={goToPrevPage} type="button">

@@ -1,24 +1,21 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import Search from "../seacrh/Search";
 import "./Input.css";
-import { PokemonData } from "../type";
+import { PokemonContext } from "../state/PokemonContext";
 
-interface InputProps {
-  onPokemonSearch: (pokemon: PokemonData[] | null) => void;
-}
+function Input() {
+  const context = useContext(PokemonContext);
+  if (!context) return null;
 
-function Input({ onPokemonSearch }: InputProps) {
-  const [pokemonName, setPokemonName] = useState("");
+  const { setSearchValue } = context;
 
   return (
     <>
       <input
         type="text"
-        onChange={(event) => {
-          setPokemonName(event.target.value);
-        }}
+        onChange={(event) => setSearchValue(event.target.value)}
       />
-      <Search pokemonName={pokemonName} onPokemonSearch={onPokemonSearch} />
+      <Search />
     </>
   );
 }
