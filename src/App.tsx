@@ -15,6 +15,7 @@ function App() {
             path="/"
             element={
               <div className="App">
+                <h1>AAAAA</h1>
                 <div className="TitleSection">
                   <div>Pokemon Stats</div>
                   <Input />

@@ -4,7 +4,6 @@ import { PokemonContext } from "../state/PokemonContext";
 import "./DisplayPokemon.css";
 
 function DisplayPokemon() {
-
   const context = useContext(PokemonContext);
   if (!context) return null;
 
