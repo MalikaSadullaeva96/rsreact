@@ -1,0 +1,30 @@
+.DisplaySelection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+    color: #000000;
+    font-size: 12px;
+}
+
+.DisplaySelection h1 {
+    font-size: 36px;
+}
+
+
+.DisplaySelection img {
+    width: 200px;
+}
+
+.allPokemons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px; 
+  }
+  
+  .allPokemons > div {
+    flex: 1 0 50%; 
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
