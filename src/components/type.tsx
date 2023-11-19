@@ -13,3 +13,7 @@ export interface PokemonState {
   searchValue: string;
   allPokemons: PokemonData[];
 }
+
+export interface DisplayPokemonProps {
+  pokemons: PokemonData[];
+}
