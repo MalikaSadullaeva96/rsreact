@@ -17,3 +17,7 @@ export interface PokemonState {
 export interface DisplayPokemonProps {
   pokemons: PokemonData[];
 }
+
+export interface SearchProps {
+  searchValue: string;
+}

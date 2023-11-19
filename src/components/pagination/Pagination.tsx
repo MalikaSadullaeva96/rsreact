@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { setAllPokemons } from "../../features/pokemonSlice";
+import { setAllPokemons, setItemsPerPage } from "../../features/pokemonSlice";
 import { useGetPokemonsQuery } from "../../services/pokemonApi";
 import DisplayPokemon from "../display/DisplayPokemon";
 import "./Pagination.css";
@@ -28,7 +28,10 @@ function Pagination() {
   };
 
   const handleLimitChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setLimit(Number(event.target.value));
+    const newLimit = Number(event.target.value);
+    setLimit(newLimit);
+    dispatch(setItemsPerPage(newLimit));
+    setOffset(0);
   };
 
   return (

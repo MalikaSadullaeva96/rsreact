@@ -1,10 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { PokemonState } from "../components/type";
 
-const initialState: PokemonState = {
+const initialState = {
   pokemon: null,
   searchValue: "",
   allPokemons: [],
+  itemsPerPage: 10,
 };
 
 export const pokemonSlice = createSlice({
@@ -20,9 +20,12 @@ export const pokemonSlice = createSlice({
     setAllPokemons: (state, action) => {
       state.allPokemons = action.payload;
     },
+    setItemsPerPage: (state, action) => {
+      state.itemsPerPage = action.payload;
+    },
   },
 });
 
-export const { setPokemon, setSearchValue, setAllPokemons } =
+export const { setPokemon, setSearchValue, setAllPokemons, setItemsPerPage } =
   pokemonSlice.actions;
 export default pokemonSlice.reducer;
