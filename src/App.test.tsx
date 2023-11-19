@@ -1,15 +1,16 @@
+import { it, expect } from "vitest";
 import { render, screen } from "@testing-library/react";
 import React from "react";
-import { test } from "vitest";
-import App from "./App";
 import { PokemonProvider } from "./components/state/PokemonContext";
+import { NotFoundPage } from "./components/notfound/NotFoundPage";
 
-test("heading test", () => {
+it("displays the 404 page for an invalid route", async () => {
   render(
     <PokemonProvider>
-      <App />
+      <NotFoundPage />
     </PokemonProvider>,
   );
-  const element = screen.getByRole("heading", { name: "AAAAA" });
+
+  const element = screen.getByRole("heading");
   expect(element).toBeInTheDocument();
 });

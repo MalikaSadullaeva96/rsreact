@@ -1,21 +1,28 @@
-import React, { useContext } from "react";
-import Search from "../seacrh/Search";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { setSearchValue } from "../../features/pokemonSlice";
 import "./Input.css";
-import { PokemonContext } from "../state/PokemonContext";
+import Search from "../seacrh/Search";
 
 function Input() {
-  const context = useContext(PokemonContext);
-  if (!context) return null;
+  const dispatch = useDispatch();
+  const [localSearchValue, setLocalSearchValue] = useState("");
 
-  const { setSearchValue } = context;
+  const handleSearchChange = (event: {
+    target: { value: React.SetStateAction<string> };
+  }) => {
+    setLocalSearchValue(event.target.value);
+    dispatch(setSearchValue(event.target.value));
+  };
 
   return (
     <>
       <input
         type="text"
-        onChange={(event) => setSearchValue(event.target.value)}
+        value={localSearchValue}
+        onChange={handleSearchChange}
       />
-      <Search />
+      <Search searchValue={localSearchValue} />
     </>
   );
 }
