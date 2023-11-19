@@ -1,14 +1,12 @@
+import React, { useEffect, useState } from "react";
 import axios from "axios";
-import React, { useContext, useEffect, useState } from "react";
 import DisplayPokemon from "../display/DisplayPokemon";
-import { PokemonContext } from "../state/PokemonContext";
 import "./Pagination.css";
+import { useDispatch } from "react-redux";
+import { setAllPokemons } from "../../features/pokemonSlice";
 
 function Pagination() {
-  const context = useContext(PokemonContext);
-  if (!context) return null;
-
-  const { setAllPokemons } = context;
+  const dispatch = useDispatch();
 
   const baseUrl = "https://pokeapi.co/api/v2/pokemon";
   const [currentPageUrl, setCurrentPageUrl] = useState(baseUrl);
@@ -27,7 +25,7 @@ function Pagination() {
           name: p.name,
         }),
       );
-      setAllPokemons(fetchedPokemons);
+      dispatch(setAllPokemons(fetchedPokemons));
     });
   }, [currentPageUrl, limit, offset]);
 

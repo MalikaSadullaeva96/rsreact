@@ -1,19 +1,16 @@
-import React, { useContext } from "react";
+import React from "react";
+import { useDispatch } from "react-redux";
 import Search from "../seacrh/Search";
 import "./Input.css";
-import { PokemonContext } from "../state/PokemonContext";
+import { setSearchValue } from "../../features/pokemonSlice";
 
 function Input() {
-  const context = useContext(PokemonContext);
-  if (!context) return null;
-
-  const { setSearchValue } = context;
-
+  const dispatch = useDispatch();
   return (
     <>
       <input
         type="text"
-        onChange={(event) => setSearchValue(event.target.value)}
+        onChange={(event) => dispatch(setSearchValue(event.target.value))}
       />
       <Search />
     </>

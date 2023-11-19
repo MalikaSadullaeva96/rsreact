@@ -1,32 +1,23 @@
-import React, { useState, useEffect, useContext } from "react";
-import "./Search.css";
-import axios from "axios";
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setPokemon } from "../../features/pokemonSlice";
+import { RootState } from "../../store/store";
 import { PokemonData } from "../type";
-import { PokemonContext } from "../state/PokemonContext";
 
 function Search() {
-  const context = useContext(PokemonContext);
-
-  if (!context) return null;
-
-  const { setPokemon, searchValue } = context;
-  const [allPokemons, setAllPokemons] = useState<PokemonData[]>([]);
-
-  useEffect(() => {
-    axios
-      .get("https://pokeapi.co/api/v2/pokemon?limit=1118")
-      .then((response) => {
-        console.log("Fetched Pokemons:", response);
-        setAllPokemons(response.data.results);
-      });
-  }, []);
+  const dispatch = useDispatch();
+  const searchValue = useSelector(
+    (state: RootState) => state.pokemon.searchValue,
+  );
+  const allPokemons = useSelector(
+    (state: RootState) => state.pokemon.allPokemons,
+  );
 
   const searchPokemon = () => {
-    const filteredPokemons = allPokemons.filter((pokemon) =>
+    const filteredPokemons = allPokemons.filter((pokemon: PokemonData) =>
       pokemon.name.startsWith(searchValue.toLowerCase()),
     );
-    console.log("Filtered Pokemons:", filteredPokemons);
-    setPokemon(filteredPokemons);
+    dispatch(setPokemon(filteredPokemons));
   };
 
   return (

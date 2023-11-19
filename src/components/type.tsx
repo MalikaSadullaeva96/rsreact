@@ -7,3 +7,9 @@ export type PokemonData = {
   defense: number;
   type: string;
 };
+
+export interface PokemonState {
+  pokemon: PokemonData[] | null;
+  searchValue: string;
+  allPokemons: PokemonData[];
+}
