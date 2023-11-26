@@ -1,8 +1,9 @@
+// components/DisplayPokemon.tsx
 import React from "react";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import { RootState } from "../../store/store";
-import "./DisplayPokemon.css";
+
 
 function DisplayPokemon() {
   const { pokemon, allPokemons } = useSelector(
@@ -16,7 +17,9 @@ function DisplayPokemon() {
           {pokemon.map((value, idx) => (
             <div key={idx} data-testid="pokemon-item">
               <h3>
-                <Link to={`/pokemon/${value.name}`}>{value.name}</Link>
+                <Link href={`/pokemon/${value.name}`}>
+                  <a>{value.name}</a>
+                </Link>
               </h3>
             </div>
           ))}

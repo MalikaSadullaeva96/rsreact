@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { setSearchValue } from "../../features/pokemonSlice";
-import "./Input.css";
 import Search from "../seacrh/Search";
 
 function Input() {

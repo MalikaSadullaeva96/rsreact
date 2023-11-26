@@ -1,16 +1,13 @@
 // pages/index.tsx
 import React from 'react';
 import Link from 'next/link';
-import { fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-
-const baseQuery = fetchBaseQuery({ baseUrl: "https://pokeapi.co/api/v2/" });
+import { getPokemonByName } from '../src/services/pokemonApi'; // Adjust the import based on your actual API utility functions
 
 export async function getStaticProps() {
-  // Here we directly call the baseQuery with the endpoint we need.
-  const { data } = await baseQuery('pokemon?limit=151'); // Fetch first 151 Pokemons for example
+  const allPokemons = await getPokemonByName();
   return {
     props: {
-      allPokemons: data.results || [],
+      allPokemons,
     },
   };
 }

@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { setAllPokemons, setItemsPerPage } from "../../features/pokemonSlice";
 import { useGetPokemonsQuery } from "../../services/pokemonApi";
 import DisplayPokemon from "../display/DisplayPokemon";
-import "./Pagination.css";
+
 
 function Pagination() {
   const dispatch = useDispatch();

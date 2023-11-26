@@ -1,11 +1,10 @@
-import React from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import { useGetPokemonByNameQuery } from "../../services/pokemonApi";
-import "./Pokemons.css";
+import React from 'react';
+import { useRouter } from 'next/router';
+import { useGetPokemonByNameQuery } from '../../src/services/pokemonApi';
 
-function PokemonInfo() {
-  const { name } = useParams();
-  const navigate = useNavigate();
+const PokemonInfo = () => {
+  const router = useRouter();
+  const { name } = router.query;
 
   const { data: pokemonDetails, isFetching } = useGetPokemonByNameQuery(name);
 
@@ -14,7 +13,7 @@ function PokemonInfo() {
   }
 
   const handleClose = () => {
-    navigate("/");
+    router.push("/");
   };
 
   return (
@@ -32,12 +31,12 @@ function PokemonInfo() {
         <h4>Defense: {pokemonDetails.stats[2].base_stat}</h4>
       </div>
       <div>
-        <button onClick={handleClose} type="submit" className="closeInfo">
+        <button onClick={handleClose} type="button" className="closeInfo">
           Close
         </button>
       </div>
     </div>
   );
-}
+};
 
 export default PokemonInfo;
