@@ -1,4 +1,3 @@
-// components/DisplayPokemon.tsx
 import React from "react";
 import { useSelector } from "react-redux";
 import Link from "next/link";
@@ -18,7 +17,7 @@ function DisplayPokemon() {
             <div key={idx} data-testid="pokemon-item">
               <h3>
                 <Link href={`/pokemon/${value.name}`}>
-                  <a>{value.name}</a>
+                {value.name}
                 </Link>
               </h3>
             </div>

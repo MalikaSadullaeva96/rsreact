@@ -1,32 +1,34 @@
 // pages/index.tsx
 import React from 'react';
-import Link from 'next/link';
-import { getPokemonByName } from '../src/services/pokemonApi'; // Adjust the import based on your actual API utility functions
+import Input from '@/components/input/Input';
+import Pagination from '@/components/pagination/Pagination';
 
 export async function getStaticProps() {
-  const allPokemons = await getPokemonByName();
-  return {
-    props: {
-      allPokemons,
-    },
-  };
+  try {
+    const res = await fetch('https://pokeapi.co/api/v2/pokemon?limit=10');
+    const data = await res.json();
+
+    return {
+      props: {
+        allPokemons: data.results || [],
+      },
+    };
+  } catch (error) {
+    console.error('Failed to fetch Pokemon data:', error);
+    return {
+      props: {
+        allPokemons: [],
+      },
+    };
+  }
 }
 
 const HomePage = ({ allPokemons }) => {
   return (
     <div>
       <h1>All Pokémon</h1>
-      <div className="allPokemons">
-        {allPokemons.map((pokemon, index) => (
-          <div key={index}>
-            <h3>
-              <Link href={`/pokemon/${pokemon.name}`}>
-                <a>{pokemon.name}</a>
-              </Link>
-            </h3>
-          </div>
-        ))}
-      </div>
+      <Input />
+      <Pagination />
     </div>
   );
 };

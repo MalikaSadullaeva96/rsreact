@@ -5,6 +5,7 @@ import '../src/components/PokemonInfo/Pokemons.css';
 import "../src/components/display/DisplayPokemon.css";
 import "../src/components/input/Input.css";
 import "../src/components/pagination/Pagination.css";
+import "../styles/global.css"
 
 function MyApp({ Component, pageProps }) {
   return (

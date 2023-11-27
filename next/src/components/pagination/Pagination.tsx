@@ -4,14 +4,12 @@ import { setAllPokemons, setItemsPerPage } from "../../features/pokemonSlice";
 import { useGetPokemonsQuery } from "../../services/pokemonApi";
 import DisplayPokemon from "../display/DisplayPokemon";
 
-
 function Pagination() {
   const dispatch = useDispatch();
-
   const [limit, setLimit] = useState(10);
   const [offset, setOffset] = useState(0);
 
-  const { data: pokemons } = useGetPokemonsQuery({ limit, offset });
+  const { data: pokemons, isFetching } = useGetPokemonsQuery({ limit, offset });
 
   useEffect(() => {
     if (pokemons?.results) {
@@ -34,6 +32,8 @@ function Pagination() {
     setOffset(0);
   };
 
+  if (isFetching) return <div>Loading...</div>;
+
   return (
     <>
       <div>
@@ -48,9 +48,8 @@ function Pagination() {
         />
       </div>
       <DisplayPokemon />
-      {console.log("oaoaoaoao")}
       <div className="pagination">
-        <button onClick={goToPrevPage} type="button">
+        <button onClick={goToPrevPage} disabled={offset === 0} type="button">
           Previous
         </button>
         <button onClick={goToNextPage} type="button">
